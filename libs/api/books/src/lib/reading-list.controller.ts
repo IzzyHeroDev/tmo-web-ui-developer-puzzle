@@ -12,7 +12,7 @@ export class ReadingListController {
   }
 
   @Post('/reading-list/')
-  async addToReadingList(@Body() item: Book) {
+  async addToReadingList(@Body() item: Book): Promise<Book> {
     return await this.readingList.addBook(item);
   }
 

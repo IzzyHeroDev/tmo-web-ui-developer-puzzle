@@ -12,7 +12,7 @@ export class ReadingListService {
     return this.storage.read();
   }
 
-  async addBook(b: Book): Promise<void> {
+  async addBook(b: Book): Promise<Book> {
     this.storage.update(list => {
       const { id, ...rest } = b;
       list.push({
@@ -21,6 +21,8 @@ export class ReadingListService {
       });
       return list;
     });
+
+    return b;
   }
 
   async removeBook(id: string): Promise<void> {

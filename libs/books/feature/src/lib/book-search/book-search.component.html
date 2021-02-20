@@ -15,7 +15,11 @@
 
 <ng-container *ngIf="searchTerm; else empty">
   <div class="book-grid" role="grid">
-    <div class="book" data-testing="book-item" *ngFor="let book of books$ | async">
+    <div
+      class="book"
+      data-testing="book-item"
+      *ngFor="let book of books$ | async"
+    >
       <div class="book--title">
         {{ book.title }}
       </div>
@@ -27,11 +31,13 @@
           <div><strong>Author:</strong> {{ book.authors.join(', ') }}</div>
           <div><strong>Publisher:</strong> {{ book.publisher }}</div>
           <div>
-            <strong>Published:</strong> {{ book.publishedDate | date:'shortDate' }}
+            <strong>Published:</strong>
+            {{ book.publishedDate | date: 'shortDate' }}
           </div>
           <p [innerHTML]="book.description"></p>
           <div>
             <button
+              data-testing="add-book-button"
               mat-flat-button
               color="primary"
               (click)="addBookToReadingList(book)"
@@ -48,7 +54,10 @@
 <ng-template #empty>
   <div class="empty">
     <p>
-      Try searching for a topic, for example "<a role="button" aria-label="Click to look for JavaScript books" (click)="searchExample()"
+      Try searching for a topic, for example "<a
+        role="button"
+        aria-label="Click to look for JavaScript books"
+        (click)="searchExample()"
         >JavaScript</a
       >".
     </p>

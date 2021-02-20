@@ -1,4 +1,5 @@
-import { $, $$, browser, ExpectedConditions } from 'protractor';
+import { $, $$, browser, by, element, ExpectedConditions } from 'protractor';
+import { protractor } from 'protractor/built/ptor';
 
 describe('When: Use the search feature', () => {
   it('Then: I should be able to search books by title', async () => {
