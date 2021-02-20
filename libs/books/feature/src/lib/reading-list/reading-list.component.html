@@ -1,24 +1,63 @@
 <ng-container *ngIf="readingList$ | async as readingList; else empty">
-  <div class="reading-list-item" *ngFor="let readingListItem of readingList">
-    <div>
-      <img class="reading-list-item--cover" [src]="readingListItem.coverUrl" />
-    </div>
-    <div class="reading-list-item--details">
-      <strong class="reading-list-item--details--title">{{ readingListItem.title }}</strong>
-      <div class="reading-list-item--details--author">
-        {{ readingListItem.authors?.join(',') }}
+  <div class="reading-list-item" data-testing="not-read-list" *ngFor="let readingListItem of readingList">
+    <ng-container *ngIf="!readingListItem.finished">
+      <div>
+        <img class="reading-list-item--cover" [src]="readingListItem.coverUrl" />
       </div>
-    </div>
-    <div>
-      <button
-        mat-icon-button
-        color="warn"
-        [attr.aria-label]="'Remove ' + readingListItem.title + ' from reading list'"
-        (click)="removeFromReadingList(readingListItem)"
-      >
-        <mat-icon>remove_circle</mat-icon>
-      </button>
-    </div>
+      <div class="reading-list-item--details">
+        <strong class="reading-list-item--details--title">{{ readingListItem.title | truncateText }}</strong>
+        <div class="reading-list-item--details--author">
+          {{ readingListItem.authors?.join(',') }}
+        </div>
+      </div>
+      <div>
+        <button
+          data-testing="mark-as-read-button" 
+          mat-icon-button
+          color="primary"
+          [attr.aria-label]="'Mark ' + readingListItem.title + ' as read'"
+          (click)="markAsRead(readingListItem)"
+        >
+          <mat-icon>done</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          [attr.aria-label]="'Remove ' + readingListItem.title + ' from reading list'"
+          (click)="removeFromReadingList(readingListItem)"
+        >
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+
+  <h1 *ngIf="readingList && readingList.length > 0">Books Finished</h1>
+
+  <div class="reading-list-item" data-testing="read-list" *ngFor="let readingListItem of readingList">
+    <ng-container *ngIf="readingListItem.finished">
+      <div>
+        <img class="reading-list-item--cover" [src]="readingListItem.coverUrl" />
+      </div>
+      <div class="reading-list-item--details">
+        <strong class="reading-list-item--details--title">{{ readingListItem.title | truncateText }}</strong>
+        <p class="reading-list-item--details--finished--date" id="finished-date">
+          Finished on: {{ readingListItem.finishedDate | date:'shortDate' }}
+        </p>
+      </div>
+      <div>
+        <button
+          data-testing="remove-button" 
+          mat-icon-button
+          color="warn"
+          [attr.aria-label]="'Remove ' + readingListItem.title + ' from reading list'"
+          (click)="removeFromReadingList(readingListItem)"
+        >
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+    
   </div>
 </ng-container>
 <ng-template #empty>
