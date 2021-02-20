@@ -15,48 +15,34 @@ import { Book } from '@tmo/shared/models';
   templateUrl: './book-search.component.html',
   styleUrls: ['./book-search.component.scss']
 })
-export class BookSearchComponent implements OnInit {
-  books: ReadingListBook[];
+export class BookSearchComponent {
+  books$ = this.store.select(getAllBooks);
 
-  searchForm = this.fb.group({
+  searchForm = this.formBuilder.group({
     term: ''
   });
 
   constructor(
     private readonly store: Store,
-    private readonly fb: FormBuilder
+    private readonly formBuilder: FormBuilder
   ) {}
 
   get searchTerm(): string {
     return this.searchForm.value.term;
   }
 
-  ngOnInit(): void {
-    this.store.select(getAllBooks).subscribe(books => {
-      this.books = books;
-    });
-  }
-
-  formatDate(date: void | string) {
-    return date
-      ? new Intl.DateTimeFormat('en-US').format(new Date(date))
-      : undefined;
-  }
-
-  addBookToReadingList(book: Book) {
+  addBookToReadingList(book: Book): void {
     this.store.dispatch(addToReadingList({ book }));
   }
 
-  searchExample() {
+  searchExample(): void {
     this.searchForm.controls.term.setValue('javascript');
     this.searchBooks();
   }
 
-  searchBooks() {
-    if (this.searchForm.value.term) {
-      this.store.dispatch(searchBooks({ term: this.searchTerm }));
-    } else {
+  searchBooks(): void {
+    this.searchForm.value.term ?
+      this.store.dispatch(searchBooks({ term: this.searchTerm })) :
       this.store.dispatch(clearSearch());
-    }
   }
 }
