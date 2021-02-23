@@ -11,11 +11,14 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TotalCountComponent } from './total-count/total-count.component';
 import { ReadingListComponent } from './reading-list/reading-list.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { TruncatePipe } from './reading-list/truncate.pipe';
 
 const EXPORTS = [
   BookSearchComponent,
   TotalCountComponent,
-  ReadingListComponent
+  ReadingListComponent,
+  TruncatePipe,
 ];
 
 @NgModule({
@@ -26,6 +29,7 @@ const EXPORTS = [
     MatIconModule,
     MatInputModule,
     MatSnackBarModule,
+    MatDividerModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([

@@ -42,3 +42,33 @@ export const removeFromReadingListFailure = createAction(
   props<{ error: any }>()
 );
 
+export const markAsRead = createAction(
+  '[Reading List] Mark book as read',
+  props<{ item: ReadingListItem }>()
+);
+
+export const markAsReadSuccess = createAction(
+  '[Reading List API] Mark book as read Success',
+  props<{ bookId: string }>()
+);
+
+export const markAsReadFailure = createAction(
+  '[Reading List API] Mark book as read Failure',
+  props<{ error: any }>()
+);
+
+export const loadReadingListItem = createAction(
+  '[Reading List] Load reading list item',
+  props<{ bookId: string }>()
+);
+
+export const loadReadingListItemSuccess = createAction(
+  '[Reading List API] Load reading list item Success',
+  props<{ item: ReadingListItem }>()
+);
+
+export const loadReadingListItemFailure = createAction(
+  '[Reading List API] Load reading list item Failure',
+  props<{ error: any }>()
+);
+
