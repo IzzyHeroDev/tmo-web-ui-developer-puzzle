@@ -14,12 +14,17 @@ export const loadReadingListFailure = createAction(
 
 export const addToReadingList = createAction(
   '[Reading List API] Add to reading list',
-  props<{ book: Book }>()
+  props<{ book: Book, fromSnackbar?: boolean }>()
 );
 
 export const addToReadingListSuccess = createAction(
   '[Reading List API] Add to reading list success',
-  props<{ item: ReadingListItem }>()
+  props<{ book: Book }>()
+);
+
+export const addToReadingListFromSnackbar = createAction(
+  '[Reading List API] Add to reading list from snackbar',
+  props<{ book: Book, fromSnackbar?: boolean }>()
 );
 
 export const addToReadingListFailure = createAction(
@@ -29,7 +34,7 @@ export const addToReadingListFailure = createAction(
 
 export const removeFromReadingList = createAction(
   '[Reading List] Remove from reading list',
-  props<{ item: ReadingListItem }>()
+  props<{ item: ReadingListItem, fromSnackbar?: boolean }>()
 );
 
 export const removeFromReadingListSuccess = createAction(
@@ -37,8 +42,23 @@ export const removeFromReadingListSuccess = createAction(
   props<{ item: ReadingListItem }>()
 );
 
+export const removeFromReadingListFromSnackbar = createAction(
+  '[Reading List] Remove from reading list from snackbar',
+  props<{ item: ReadingListItem, fromSnackbar?: boolean }>()
+);
+
 export const removeFromReadingListFailure = createAction(
   '[Reading List API] Remove from reading list Failure',
   props<{ error: any }>()
 );
 
+export const showAddingSnackbar = createAction(
+  '[Reading List] Show Adding Snackbar',
+  props<{ book: Book }>()
+);
+
+
+export const showRemovingSnackbar = createAction(
+  '[Reading List] Show Removing Snackbar',
+  props<{ item: ReadingListItem }>()
+);
