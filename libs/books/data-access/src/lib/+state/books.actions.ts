@@ -7,12 +7,12 @@ export const searchBooks = createAction(
 );
 
 export const searchBooksSuccess = createAction(
-  '[Book Search API] Search success',
+  '[Books Search API] Search success',
   props<{ books: Book[] }>()
 );
 
 export const searchBooksFailure = createAction(
-  '[Book Search API] Search failure',
+  '[Books Search API] Search failure',
   props<{ error: any }>()
 );
 

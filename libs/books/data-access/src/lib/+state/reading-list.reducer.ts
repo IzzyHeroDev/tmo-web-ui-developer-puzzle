@@ -41,17 +41,18 @@ const readingListReducer = createReducer(
       loaded: true
     });
   }),
-  on(ReadingListActions.loadReadingListError, (state, action) => {
+  on(ReadingListActions.loadReadingListFailure, (state, action) => {
     return {
       ...state,
       error: action.error
     };
   }),
+  on(ReadingListActions.loadReadingListFailure, (state) => readingListAdapter.removeAll(state)),
   on(ReadingListActions.addToReadingList, (state, action) =>
-    readingListAdapter.addOne({ bookId: action.book.id, ...action.book }, state)
+    readingListAdapter.addOne({ bookId: action.book?.id, ...action.book }, state)
   ),
   on(ReadingListActions.removeFromReadingList, (state, action) =>
-    readingListAdapter.removeOne(action.item.bookId, state)
+    readingListAdapter.removeOne(action.item?.bookId, state)
   )
 );
 
